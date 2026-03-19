@@ -1,11 +1,12 @@
 package com.example.demo.common;
 
 public class Result<T> {
-    private Integer code;
+    // 三个核心属性
     private String msg;
+    private Integer code;
     private T data;
 
-    // 成功返回
+    // 静态工厂方法：成功回调（返回数据+成功状态）
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
         result.code = ResultCode.SUCCESS.getCode();
@@ -14,7 +15,7 @@ public class Result<T> {
         return result;
     }
 
-    // 失败返回
+    // 静态工厂方法：失败回调（返回指定状态码+提示，无数据）
     public static <T> Result<T> error(ResultCode resultCode) {
         Result<T> result = new Result<>();
         result.code = resultCode.getCode();
@@ -23,11 +24,28 @@ public class Result<T> {
         return result;
     }
 
-    // Getter & Setter
-    public Integer getCode() { return code; }
-    public void setCode(Integer code) { this.code = code; }
-    public String getMsg() { return msg; }
-    public void setMsg(String msg) { this.msg = msg; }
-    public T getData() { return data; }
-    public void setData(T data) { this.data = data; }
+    // 自动生成的Getter和Setter方法（全属性）
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }
